@@ -38,6 +38,13 @@ class MyHomePage extends StatelessWidget {
             child: Text('List of Transactions'),
             elevation: 2,
           ),
+          Container(
+            width: double.infinity,
+            child: const Card(
+              child: Text('Another Card'),
+              elevation: 2,
+            ),
+          ),
         ],
       ),
     );
