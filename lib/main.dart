@@ -54,9 +54,17 @@ class MyHomePage extends StatelessWidget {
               elevation: 2,
             ),
           ),
-          const Card(
-            child: Text('List of Transactions'),
-            elevation: 2,
+          Column(
+            /* A função map vai receber uma outro função, 
+            que por sua vez essa mesma função vai receber 
+            cada um dos elementos*/
+            /* A ideia é converter um objecto do tipo transaction 
+            para um componente visual*/
+            children: _transactions.map((tr) {
+              return Card(
+                child: Text(tr.title),
+              );
+            }).toList(),
           ),
         ],
       ),
