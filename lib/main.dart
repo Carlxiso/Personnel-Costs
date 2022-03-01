@@ -18,6 +18,14 @@ class ExpensesApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   // const MyHomePage({Key? key}) : super(key: key);
 
+  /* - Option One - */
+  /* - late String title; - */
+  /* - late String value; - */
+
+  /* - Option Two - */
+  final titleController = TextEditingController();
+  final valueControler = TextEditingController();
+
   //List
   final _transactions = [
     // Elements type Transaction
@@ -116,11 +124,19 @@ class MyHomePage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   TextField(
+                    /* - Option One - */
+                    /* - onChanged: (newValue) => title = newValue, - */
+                    /* - Option Two - */
+                    controller: titleController,
                     decoration: InputDecoration(
                       labelText: 'Title',
                     ),
                   ),
                   TextField(
+                    /* - Option One - */
+                    /* - onChanged: (newValue) => value = newValue, - */
+                    /* - Option Two - */
+                    controller: valueControler,
                     decoration: InputDecoration(
                       labelText: 'Valor(€)',
                     ),
@@ -133,7 +149,15 @@ class MyHomePage extends StatelessWidget {
                           primary: Colors.pinkAccent,
                           onPrimary: Colors.white,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          /* - Option One - */
+                          /* - print(title); - */
+                          /* - print(value); - */
+
+                          /* - Option Two - */
+                          print(titleController.text);
+                          print(valueControler.text);
+                        },
                         child: Text('New Transaction'),
                       ),
                     ],
