@@ -9,6 +9,11 @@ class TransactionForm extends StatelessWidget {
   final titleController = TextEditingController();
   final valueControler = TextEditingController();
 
+  //The function that will communivcate with widget parent "transaction_user"
+  final void Function(String, double) onSubmit;
+  //Constructor
+  TransactionForm(this.onSubmit);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -49,8 +54,9 @@ class TransactionForm extends StatelessWidget {
                     /* - print(value); - */
 
                     /* - Option Two - */
-                    print(titleController.text);
-                    print(valueControler.text);
+                    final title = titleController.text;
+                    final value = double.tryParse(valueControler.text) ?? 0.0;
+                    onSubmit(title, value);
                   },
                   child: Text('New Transaction'),
                 ),
