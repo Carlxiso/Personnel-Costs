@@ -27,22 +27,25 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Personnel Costs'),
       ),
-      // Component Type Column
-      body: Column(
-        // mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        //Column receive a set of elements (Example: children  element)
-        children: <Widget>[
-          //Two components type Card
-          Container(
-            width: double.infinity,
-            child: const Card(
-              child: Text('Chart'),
-              elevation: 2,
+      //It solves the bar warning scroll problem
+      body: SingleChildScrollView(
+        // Component Type Column
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          //Column receive a set of elements (Example: children  element)
+          children: <Widget>[
+            //Two components type Card
+            Container(
+              width: double.infinity,
+              child: const Card(
+                child: Text('Chart'),
+                elevation: 2,
+              ),
             ),
-          ),
-          TransactionUser(),
-        ],
+            TransactionUser(),
+          ],
+        ),
       ),
     );
   }
