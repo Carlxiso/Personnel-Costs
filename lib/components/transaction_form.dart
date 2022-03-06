@@ -59,7 +59,7 @@ class TransactionForm extends StatelessWidget {
                     onSubmit(title, value);
                   },
                   child: Text('New Transaction'),
-                ),
+                )
               ],
             ),
           ],
