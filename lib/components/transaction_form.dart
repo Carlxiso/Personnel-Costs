@@ -65,7 +65,7 @@ class TransactionForm extends StatelessWidget {
                     onPrimary: Colors.white,
                   ),
                   onPressed: _submitForm,
-                  child: Text('New Transaction'),
+                  child: const Text('New Transaction'),
                 )
               ],
             ),
