@@ -10,16 +10,40 @@ main() => runApp(ExpensesApp());
 
 class ExpensesApp extends StatelessWidget {
   // const ExpensesApp({ Key? key }) : super(key: key);
-
+  final ThemeData tema = ThemeData();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyHomePage(),
+      home: const MyHomePage(),
+      // Create a Theme for this app
+      theme: tema.copyWith(
+        colorScheme: tema.colorScheme.copyWith(
+          primary: Colors.purple,
+          secondary: Colors.amber,
+        ),
+        textTheme: tema.textTheme.copyWith(
+          headline6: const TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -55,6 +79,8 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _transactions.add(newTransaction);
     });
+    // Navigator é um widget do tipo stateful
+    Navigator.of(context).pop();
   }
 
   _openTransactionsFormModal(BuildContext context) {
@@ -95,13 +121,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 elevation: 2,
               ),
             ),
+            TransactionList(_transactions),
             // TransactionUser(),
-            Column(
-              children: <Widget>[
-                TransactionForm(_addTransaction),
-                TransactionList(_transactions),
-              ],
-            ),
           ],
         ),
       ),
