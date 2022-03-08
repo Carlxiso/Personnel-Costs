@@ -52,20 +52,20 @@ class _MyHomePageState extends State<MyHomePage> {
   // const MyHomePage({Key? key}) : super(key: key);
 
   //List
-  final _transactions = [
+  final List<Transaction> _transactions = [
     // Elements type Transaction
-    Transaction(
-      id: 'T1',
-      title: 'New Sneakers',
-      value: 310.75,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 'T2',
-      title: 'Electricity de Luz ',
-      value: 200.1,
-      date: DateTime.now(),
-    )
+    // Transaction(
+    //   id: 'T1',
+    //   title: 'New Sneakers',
+    //   value: 310.75,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 'T2',
+    //   title: 'Electricity de Luz ',
+    //   value: 200.1,
+    //   date: DateTime.now(),
+    // )
   ];
 
 //Function to add Transaction
