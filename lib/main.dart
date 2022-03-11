@@ -1,3 +1,4 @@
+import 'package:costs/components/chart.dart';
 import 'package:costs/components/transaction_form.dart';
 import 'package:flutter/material.dart';
 // import '/components/transaction_user.dart';
@@ -5,6 +6,7 @@ import 'dart:math';
 import 'components/transaction_form.dart';
 import 'components/transaction_list.dart';
 import 'models/transactions.dart';
+import 'components/chart.dart';
 
 main() => runApp(ExpensesApp());
 
@@ -54,19 +56,34 @@ class _MyHomePageState extends State<MyHomePage> {
   //List
   final List<Transaction> _transactions = [
     // Elements type Transaction
-    // Transaction(
-    //   id: 'T1',
-    //   title: 'New Sneakers',
-    //   value: 310.75,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 'T2',
-    //   title: 'Electricity de Luz ',
-    //   value: 200.1,
-    //   date: DateTime.now(),
-    // )
+    Transaction(
+      id: 'T0',
+      title: 'New Bill',
+      value: 500.98,
+      date: DateTime.now().subtract(const Duration(days: 34)),
+    ),
+    Transaction(
+      id: 'T1',
+      title: 'New Sneakers',
+      value: 310.75,
+      date: DateTime.now().subtract(const Duration(days: 3)),
+    ),
+    Transaction(
+      id: 'T2',
+      title: 'Electricity de Luz ',
+      value: 200.1,
+      date: DateTime.now().subtract(const Duration(days: 4)),
+    )
   ];
+
+  List<Transaction> get _recentTransactions {
+    // Method Where is === to filter method.
+    return _transactions.where((tr) {
+      return tr.date.isAfter(DateTime.now().subtract(
+        Duration(days: 7),
+      ));
+    }).toList();
+  }
 
 //Function to add Transaction
   _addTransaction(String title, double value) {
@@ -114,13 +131,14 @@ class _MyHomePageState extends State<MyHomePage> {
           //Column receive a set of elements (Example: children  element)
           children: <Widget>[
             //Two components type Card
-            Container(
-              width: double.infinity,
-              child: const Card(
-                child: Text('Chart'),
-                elevation: 2,
-              ),
-            ),
+            Chart(_recentTransactions),
+            // Container(
+            //   width: double.infinity,
+            //   child: const Card(
+            //     child: Text('Chart'),
+            //     elevation: 2,
+            //   ),
+            // ),
             TransactionList(_transactions),
             // TransactionUser(),
           ],
