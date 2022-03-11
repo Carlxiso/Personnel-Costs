@@ -132,13 +132,6 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             //Two components type Card
             Chart(_recentTransactions),
-            // Container(
-            //   width: double.infinity,
-            //   child: const Card(
-            //     child: Text('Chart'),
-            //     elevation: 2,
-            //   ),
-            // ),
             TransactionList(_transactions),
             // TransactionUser(),
           ],
