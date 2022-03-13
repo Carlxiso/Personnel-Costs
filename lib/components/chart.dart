@@ -42,9 +42,23 @@ class Chart extends StatelessWidget {
     });
   }
 
+  // Getter que vai calcular o total gasto na semana
+
+  double get _weekTotalValue {
+    //Método Fold()
+    /*
+    Funciona como o método Reduce(). Ele tem uma função que têm um acumulador
+    e o elemento actual sendo o objectivo fazer uma operação sempre retornando
+    o elemento que será usado como acumulador da primeira opeeração. 
+     */
+    return groupedTransactions.fold(0.0, (acc, tr) {
+      return acc + (tr['value'] as double);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    groupedTransactions;
+    // groupedTransactions;
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
@@ -53,7 +67,7 @@ class Chart extends StatelessWidget {
           return ChartBar(
             label: tr['day'].toString(),
             value: double.parse(tr['value'].toString()),
-            percentage: 0.5,
+            percentage: (tr['value'] as double) / _weekTotalValue,
           );
         }).toList(),
       ),
