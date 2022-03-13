@@ -39,7 +39,7 @@ class Chart extends StatelessWidget {
             DateFormat.E().format(weekDay)[0],
         'value': totalSum,
       };
-    });
+    }).reversed.toList();
   }
 
   // Getter que vai calcular o total gasto na semana
