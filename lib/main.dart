@@ -73,6 +73,18 @@ class _MyHomePageState extends State<MyHomePage> {
       title: 'Electricity de Luz ',
       value: 200.1,
       date: DateTime.now().subtract(const Duration(days: 4)),
+    ),
+    Transaction(
+      id: 'T3',
+      title: 'Credit Card',
+      value: 10010.90,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 'T4',
+      title: 'Lunch',
+      value: 20.0,
+      date: DateTime.now(),
     )
   ];
 
