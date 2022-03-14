@@ -58,39 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // const MyHomePage({Key? key}) : super(key: key);
 
   //List
-  final List<Transaction> _transactions = [
-    // Elements type Transaction
-    Transaction(
-      id: 'T0',
-      title: 'New Bill',
-      value: 500.98,
-      date: DateTime.now().subtract(const Duration(days: 34)),
-    ),
-    Transaction(
-      id: 'T1',
-      title: 'New Sneakers',
-      value: 310.75,
-      date: DateTime.now().subtract(const Duration(days: 3)),
-    ),
-    Transaction(
-      id: 'T2',
-      title: 'Electricity de Luz ',
-      value: 200.1,
-      date: DateTime.now().subtract(const Duration(days: 4)),
-    ),
-    Transaction(
-      id: 'T3',
-      title: 'Credit Card',
-      value: 10010.90,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 'T4',
-      title: 'Lunch',
-      value: 20.0,
-      date: DateTime.now(),
-    )
-  ];
+  final List<Transaction> _transactions = [];
 
   List<Transaction> get _recentTransactions {
     // Method Where is === to filter method.
@@ -102,12 +70,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 //Function to add Transaction
-  _addTransaction(String title, double value) {
+  _addTransaction(String title, double value, DateTime date) {
     final newTransaction = Transaction(
       id: Random().nextDouble().toString(),
       title: title,
       value: value,
-      date: DateTime.now(),
+      date: date,
     );
     setState(() {
       _transactions.add(newTransaction);
