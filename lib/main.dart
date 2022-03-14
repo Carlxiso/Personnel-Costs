@@ -30,7 +30,7 @@ class ExpensesApp extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
-          button: TextStyle(
+          button: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
@@ -93,6 +93,14 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+  _removeTransaction(String id) {
+    setState(() {
+      _transactions.removeWhere((tr) {
+        return tr.id == id;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             //Two components type Card
             Chart(_recentTransactions),
-            TransactionList(_transactions),
+            TransactionList(_transactions, _removeTransaction),
             // TransactionUser(),
           ],
         ),
