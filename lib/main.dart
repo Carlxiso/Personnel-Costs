@@ -103,17 +103,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      title: const Text('Personnel Costs'),
+      actions: <Widget>[
+        // Opens the model so that we can insert transactions
+        IconButton(
+          icon: const Icon(Icons.add),
+          onPressed: () => _openTransactionsFormModal(context),
+        )
+      ],
+    );
+    final availableHeight = MediaQuery.of(context).size.height -
+        appBar.preferredSize.height -
+        MediaQuery.of(context).padding.top;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Personnel Costs'),
-        actions: <Widget>[
-          // Opens the model so that we can insert transactions
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () => _openTransactionsFormModal(context),
-          )
-        ],
-      ),
+      appBar: appBar,
       //It solves the bar warning scroll problem
       body: SingleChildScrollView(
         // Component Type Column
@@ -123,8 +128,14 @@ class _MyHomePageState extends State<MyHomePage> {
           //Column receive a set of elements (Example: children  element)
           children: <Widget>[
             //Two components type Card
-            Chart(_recentTransactions),
-            TransactionList(_transactions, _removeTransaction),
+            Container(
+              height: availableHeight * 0.3,
+              child: Chart(_recentTransactions),
+            ),
+            Container(
+              height: availableHeight * 0.7,
+              child: TransactionList(_transactions, _removeTransaction),
+            ),
             // TransactionUser(),
           ],
         ),

@@ -16,81 +16,70 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 400,
-      width: double.infinity,
-      /*The ListView Widget will do the same thing we did with 
-      the SingleChildScrollView widget
-
-      just like the SingleChildScrollView this component needs to have 
-      a parent component with a pre-defined size
+    return transactions.isEmpty
+        ? Column(
+            children: <Widget>[
+              const SizedBox(
+                height: 40,
+              ),
+              Text(
+                'No registered transactions.',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              Container(
+                height: 100,
+                child: Image.asset(
+                  'assets/images/waiting.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ],
+          )
+        : ListView.builder(
+            /*
+      With the ListView.builder you can control the number of items 
+      displayed. This means that the number of rendering is controlled 
+      or it makes the application faster 
       */
-
-      child: transactions.isEmpty
-          ? Column(
-              children: <Widget>[
-                const SizedBox(
-                  height: 40,
+            itemCount: transactions.length,
+            itemBuilder: (ctx, index) {
+              final tr = transactions[index];
+              return Card(
+                elevation: 5,
+                margin: const EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 5,
                 ),
-                Text(
-                  'No registered transactions.',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                Container(
-                  height: 100,
-                  child: Image.asset(
-                    'assets/images/waiting.png',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ],
-            )
-          : ListView.builder(
-              /*
-        With the ListView.builder you can control the number of items 
-        displayed. This means that the number of rendering is controlled 
-        or it makes the application faster 
-        */
-              itemCount: transactions.length,
-              itemBuilder: (ctx, index) {
-                final tr = transactions[index];
-                return Card(
-                  elevation: 5,
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 5,
-                  ),
-                  child: ListTile(
-                    //leading é a parte inicial do 'tijolo'
-                    leading: CircleAvatar(
-                      radius: 30,
-                      child: Padding(
-                        padding: const EdgeInsets.all(6),
-                        child: FittedBox(
-                            child: Text(
-                          '€${tr.value}',
-                        )),
-                      ),
-                    ),
-                    title: Text(
-                      tr.title,
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                    subtitle: Text(
-                      DateFormat('d MM y').format(tr.date),
-                    ),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.delete),
-                      color: Theme.of(context).errorColor,
-                      onPressed: () => onRemove(tr.id),
+                child: ListTile(
+                  //leading é a parte inicial do 'tijolo'
+                  leading: CircleAvatar(
+                    radius: 30,
+                    child: Padding(
+                      padding: const EdgeInsets.all(6),
+                      child: FittedBox(
+                          child: Text(
+                        '€${tr.value}',
+                      )),
                     ),
                   ),
-                );
-              },
-            ),
-    );
+                  title: Text(
+                    tr.title,
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  subtitle: Text(
+                    DateFormat('d MM y').format(tr.date),
+                  ),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.delete),
+                    color: Theme.of(context).errorColor,
+                    onPressed: () => onRemove(tr.id),
+                  ),
+                ),
+              );
+            },
+          );
   }
 }
