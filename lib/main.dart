@@ -104,7 +104,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final appBar = AppBar(
-      title: const Text('Personnel Costs'),
+      title: Text(
+        'Personnel Costs',
+        style: TextStyle(
+          fontSize: 20 * MediaQuery.of(context).textScaleFactor,
+        ),
+      ),
       actions: <Widget>[
         // Opens the model so that we can insert transactions
         IconButton(
