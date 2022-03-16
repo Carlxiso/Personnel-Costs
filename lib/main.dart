@@ -104,11 +104,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final appBar = AppBar(
-      title: Text(
+      title: const Text(
         'Personnel Costs',
-        style: TextStyle(
-          fontSize: 20 * MediaQuery.of(context).textScaleFactor,
-        ),
       ),
       actions: <Widget>[
         // Opens the model so that we can insert transactions
@@ -134,11 +131,11 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             //Two components type Card
             Container(
-              height: availableHeight * 0.3,
+              height: availableHeight * 0.30,
               child: Chart(_recentTransactions),
             ),
             Container(
-              height: availableHeight * 0.7,
+              height: availableHeight * 0.70,
               child: TransactionList(_transactions, _removeTransaction),
             ),
             // TransactionUser(),
