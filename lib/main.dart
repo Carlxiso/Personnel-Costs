@@ -60,6 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
   //List
   final List<Transaction> _transactions = [];
 
+  bool _showChart = false;
+
   List<Transaction> get _recentTransactions {
     // Method Where is === to filter method.
     return _transactions.where((tr) {
@@ -129,15 +131,32 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           //Column receive a set of elements (Example: children  element)
           children: <Widget>[
-            //Two components type Card
-            Container(
-              height: availableHeight * 0.30,
-              child: Chart(_recentTransactions),
+            //Component Switch()
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Show Chart'),
+                Switch(
+                  value: _showChart,
+                  onChanged: (value) {
+                    setState(() {
+                      _showChart = value;
+                    });
+                  },
+                ),
+              ],
             ),
-            Container(
-              height: availableHeight * 0.70,
-              child: TransactionList(_transactions, _removeTransaction),
-            ),
+            if (_showChart)
+              //Two components type Card
+              Container(
+                height: availableHeight * 0.30,
+                child: Chart(_recentTransactions),
+              ),
+            if (!_showChart)
+              Container(
+                height: availableHeight * 0.70,
+                child: TransactionList(_transactions, _removeTransaction),
+              ),
             // TransactionUser(),
           ],
         ),
