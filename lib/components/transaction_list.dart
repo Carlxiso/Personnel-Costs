@@ -17,27 +17,34 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return transactions.isEmpty
-        ? Column(
-            children: <Widget>[
-              const SizedBox(
-                height: 40,
+        ? LayoutBuilder(builder: (context, constraints) {
+            return Center(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: constraints.maxHeight * 0.05,
+                  ),
+                  Container(
+                    height: constraints.maxHeight * 0.11,
+                    child: Text(
+                      'No registered transactions.',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                  SizedBox(
+                    height: constraints.maxHeight * 0.05,
+                  ),
+                  Container(
+                    height: constraints.maxHeight * 0.6,
+                    child: Image.asset(
+                      'assets/images/waiting.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                'No registered transactions.',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              Container(
-                height: 100,
-                child: Image.asset(
-                  'assets/images/waiting.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ],
-          )
+            );
+          })
         : ListView.builder(
             /*
       With the ListView.builder you can control the number of items 
