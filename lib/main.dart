@@ -114,10 +114,19 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       actions: <Widget>[
         // Opens the model so that we can insert transactions
+        if (isLandscape)
+          IconButton(
+            icon: Icon(_showChart ? Icons.list : Icons.show_chart),
+            onPressed: () {
+              setState(() {
+                _showChart = !_showChart;
+              });
+            },
+          ),
         IconButton(
           icon: const Icon(Icons.add),
           onPressed: () => _openTransactionsFormModal(context),
-        )
+        ),
       ],
     );
     final availableHeight = MediaQuery.of(context).size.height -
