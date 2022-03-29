@@ -55,72 +55,81 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: <Widget>[
-            TextField(
-              /* - Option One - */
-              /* - onChanged: (newValue) => title = newValue, - */
-              /* - Option Two - */
-              controller: _titleController,
-              onSubmitted: (_) => _submitForm(),
-              decoration: const InputDecoration(
-                labelText: 'Title',
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: 10,
+            right: 10,
+            left: 10,
+            bottom: 10 + MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Column(
+            children: <Widget>[
+              TextField(
+                /* - Option One - */
+                /* - onChanged: (newValue) => title = newValue, - */
+                /* - Option Two - */
+                controller: _titleController,
+                onSubmitted: (_) => _submitForm(),
+                decoration: const InputDecoration(
+                  labelText: 'Title',
+                ),
               ),
-            ),
-            TextField(
-              /* - Option One - */
-              /* - onChanged: (newValue) => value = newValue, - */
-              /* - Option Two - */
-              controller: _valueControler,
-              //Shows the keyboard
-              keyboardType:
-                  const TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => _submitForm(),
-              decoration: const InputDecoration(
-                labelText: 'Valor(€)',
+              TextField(
+                /* - Option One - */
+                /* - onChanged: (newValue) => value = newValue, - */
+                /* - Option Two - */
+                controller: _valueControler,
+                //Shows the keyboard
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                onSubmitted: (_) => _submitForm(),
+                decoration: const InputDecoration(
+                  labelText: 'Valor(€)',
+                ),
               ),
-            ),
-            Container(
-              height: 100,
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      _selectedDate == null
-                          ? 'No selected date.'
-                          : 'Date Selected: ${DateFormat('dd/MM/y').format(_selectedDate)}',
-                    ),
-                  ),
-                  TextButton(
-                    child: const Text(
-                      'Select Date',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+              Container(
+                height: 100,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        _selectedDate == null
+                            ? 'No selected date.'
+                            : 'Date Selected: ${DateFormat('dd/MM/y').format(
+                                _selectedDate,
+                              )}',
                       ),
                     ),
-                    onPressed: _showDatePicker,
-                  ),
+                    TextButton(
+                      child: const Text(
+                        'Select Date',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onPressed: _showDatePicker,
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.pinkAccent,
+                      onPrimary: Colors.white,
+                    ),
+                    onPressed: _submitForm,
+                    child: const Text('New Transaction'),
+                  )
                 ],
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.pinkAccent,
-                    onPrimary: Colors.white,
-                  ),
-                  onPressed: _submitForm,
-                  child: const Text('New Transaction'),
-                )
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
