@@ -1,5 +1,7 @@
 // This component will receive as parameter the list
 
+// import 'dart:html';
+
 import 'package:flutter/material.dart';
 import '../models/transactions.dart';
 import 'package:intl/intl.dart';
@@ -79,11 +81,20 @@ class TransactionList extends StatelessWidget {
                   subtitle: Text(
                     DateFormat('d MM y').format(tr.date),
                   ),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.delete),
-                    color: Theme.of(context).errorColor,
-                    onPressed: () => onRemove(tr.id),
-                  ),
+                  trailing: MediaQuery.of(context).size.width > 480
+                      ? TextButton.icon(
+                          onPressed: () => onRemove(tr.id),
+                          icon: const Icon(Icons.delete),
+                          label: Text('Exclude'),
+                          style: TextButton.styleFrom(
+                            primary: Theme.of(context).errorColor,
+                          ),
+                        )
+                      : IconButton(
+                          icon: const Icon(Icons.delete),
+                          color: Theme.of(context).errorColor,
+                          onPressed: () => onRemove(tr.id),
+                        ),
                 ),
               );
             },
