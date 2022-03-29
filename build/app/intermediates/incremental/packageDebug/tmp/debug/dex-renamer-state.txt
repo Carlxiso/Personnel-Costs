@@ -1,4 +1,4 @@
-#Mon Mar 28 20:11:24 WEST 2022
+#Tue Mar 29 12:32:59 WEST 2022
 base.0=/Users/carlosnarciso/development/curso_flutter/Personnel-Costs/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
