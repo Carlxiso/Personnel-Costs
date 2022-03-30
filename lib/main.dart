@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:costs/components/chart.dart';
 import 'package:costs/components/transaction_form.dart';
 import 'package:flutter/material.dart';
@@ -144,22 +145,27 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           //Column receive a set of elements (Example: children  element)
           children: <Widget>[
-            if (isLandscape)
-              //Component Switch()
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Show Chart'),
-                  Switch(
-                    value: _showChart,
-                    onChanged: (value) {
-                      setState(() {
-                        _showChart = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
+            // if (isLandscape)
+            //   //Component Switch()
+            //   Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       Text('Show Chart'),
+            //       /*
+            //       Constructor Nomeado adaptative para o Switch
+            //       usar padões visuais iOS ou Andorid consoante a plataforma.
+            //       */
+            //       Switch.adaptive(
+            //         activeColor: Theme.of(context).primaryColor,
+            //         value: _showChart,
+            //         onChanged: (value) {
+            //           setState(() {
+            //             _showChart = value;
+            //           });
+            //         },
+            //       ),
+            //     ],
+            //   ),
             if (_showChart || !isLandscape)
               //Two components type Card
               Container(
@@ -175,10 +181,12 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () => _openTransactionsFormModal(context),
-      ),
+      floatingActionButton: Platform.isIOS
+          ? Container()
+          : FloatingActionButton(
+              child: const Icon(Icons.add),
+              onPressed: () => _openTransactionsFormModal(context),
+            ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
