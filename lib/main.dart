@@ -116,12 +116,17 @@ class _MyHomePageState extends State<MyHomePage> {
     final mediaQuery = MediaQuery.of(context);
 
     bool isLandscape = mediaQuery.orientation == Orientation.landscape;
+    final chartList =
+        Platform.isIOS ? CupertinoIcons.chart_bar_alt_fill : Icons.show_chart;
+
+    final iconList =
+        Platform.isIOS ? CupertinoIcons.chart_bar_alt_fill : Icons.list;
 
     final actions = <Widget>[
       // Opens the model so that we can insert transactions
       if (isLandscape)
         _getIconButton(
-          _showChart ? Icons.list : Icons.show_chart,
+          _showChart ? iconList : chartList,
           () {
             setState(() {
               _showChart = !_showChart;
@@ -141,48 +146,51 @@ class _MyHomePageState extends State<MyHomePage> {
     final availableHeight = mediaQuery.size.height -
         appBar.preferredSize.height -
         mediaQuery.padding.top;
-
-    final bodyPage = SingleChildScrollView(
-      // Component Type Column
-      child: Column(
-        // mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        //Column receive a set of elements (Example: children  element)
-        children: <Widget>[
-          // if (isLandscape)
-          //   //Component Switch()
-          //   Row(
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: [
-          //       Text('Show Chart'),
-          //       /*
-          //       Constructor Nomeado adaptative para o Switch
-          //       usar padões visuais iOS ou Andorid consoante a plataforma.
-          //       */
-          //       Switch.adaptive(
-          //         activeColor: Theme.of(context).primaryColor,
-          //         value: _showChart,
-          //         onChanged: (value) {
-          //           setState(() {
-          //             _showChart = value;
-          //           });
-          //         },
-          //       ),
-          //     ],
-          //   ),
-          if (_showChart || !isLandscape)
-            //Two components type Card
-            Container(
-              height: availableHeight * (isLandscape ? 0.7 : 0.3),
-              child: Chart(_recentTransactions),
-            ),
-          if (!_showChart || !isLandscape)
-            Container(
-              height: availableHeight * (isLandscape ? 1 : 0.7),
-              child: TransactionList(_transactions, _removeTransaction),
-            ),
-          // TransactionUser(),
-        ],
+    /*Componente SafeArea vai dizer qual é a area segura para colocar os nossos
+    widgets, isto é SafeArea disconsidera eventuais areas que nao devem ser utilizadas*/
+    final bodyPage = SafeArea(
+      child: SingleChildScrollView(
+        // Component Type Column
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          //Column receive a set of elements (Example: children  element)
+          children: <Widget>[
+            // if (isLandscape)
+            //   //Component Switch()
+            //   Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       Text('Show Chart'),
+            //       /*
+            //       Constructor Nomeado adaptative para o Switch
+            //       usar padões visuais iOS ou Andorid consoante a plataforma.
+            //       */
+            //       Switch.adaptive(
+            //         activeColor: Theme.of(context).primaryColor,
+            //         value: _showChart,
+            //         onChanged: (value) {
+            //           setState(() {
+            //             _showChart = value;
+            //           });
+            //         },
+            //       ),
+            //     ],
+            //   ),
+            if (_showChart || !isLandscape)
+              //Two components type Card
+              Container(
+                height: availableHeight * (isLandscape ? 0.7 : 0.3),
+                child: Chart(_recentTransactions),
+              ),
+            if (!_showChart || !isLandscape)
+              Container(
+                height: availableHeight * (isLandscape ? 1 : 0.7),
+                child: TransactionList(_transactions, _removeTransaction),
+              ),
+            // TransactionUser(),
+          ],
+        ),
       ),
     );
 
