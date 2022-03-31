@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // Method Where is === to filter method.
     return _transactions.where((tr) {
       return tr.date.isAfter(DateTime.now().subtract(
-        Duration(days: 7),
+        const Duration(days: 7),
       ));
     }).toList();
   }
