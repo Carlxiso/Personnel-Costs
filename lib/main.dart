@@ -56,13 +56,32 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+// Recurso Mixin - with WidgetsBindingObserver
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   // const MyHomePage({Key? key}) : super(key: key);
 
   //List
   final List<Transaction> _transactions = [];
 
   bool _showChart = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addObserver(this);
+  }
+
+  //Method
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print(state);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance!.removeObserver(this);
+  }
 
   List<Transaction> get _recentTransactions {
     // Method Where is === to filter method.
